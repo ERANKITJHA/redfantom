@@ -1,0 +1,2349 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Home</title>
+		<!-- Option 1: Include in HTML -->
+		<script
+			src="https://kit.fontawesome.com/37d9ce4670.js"
+			crossorigin="anonymous"
+		></script>
+		<style>
+			* {
+				font-family: 'Montserrat', sans-serif;
+				padding: 0;
+				margin: 0;
+				box-sizing: border-box;
+				font-family: futura;
+			}
+
+			@font-face {
+				font-family: futura;
+				src: url(../font/FuturaMediumBT.ttf);
+			}
+
+			::-webkit-scrollbar {
+				display: none;
+			}
+
+			.highlight {
+				background-image: linear-gradient(to right, yellow, #ca137e);
+				-webkit-text-fill-color: transparent;
+				-webkit-background-clip: text;
+			}
+
+			.highlight-border {
+				border: 3px solid;
+				border-image-source: linear-gradient(
+					to right,
+					#ff006f,
+					#9d00fa
+				);
+				border-image-slice: 1;
+			}
+
+			.gradient_text {
+				background: -webkit-linear-gradient(
+					153deg,
+					rgba(255, 0, 111, 1) 2%,
+					rgba(157, 0, 250, 1) 89%
+				);
+
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+			}
+
+			/** READ MORE SECTION **/
+			.read_more_sec {
+				display: flex;
+				gap: 20px;
+				color: white;
+				align-items: center;
+				letter-spacing: 5px;
+			}
+
+			.read_more_arrow {
+				width: 30px;
+				height: 30px;
+				border: 2px solid white;
+				border-radius: 50%;
+				position: relative;
+			}
+
+			.read_more_arrow svg {
+				top: 50%;
+				left: 0;
+				position: absolute;
+				transform: translate(-20%, -50%);
+			}
+
+			/** SLIDER CSS **/
+			.slider {
+				position: absolute;
+				bottom: 5%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				gap: 1rem;
+				padding: 0px 1rem;
+			}
+
+			.slider div,
+			.slider button {
+				padding: 0.5rem 1rem;
+				font-size: large;
+				font-weight: 700;
+				color: #fff;
+				background: none;
+				border-image-source: linear-gradient(
+					to right,
+					#ff006f,
+					#9d00fa
+				);
+				border-image-slice: 1;
+				border-bottom: 3px solid;
+				border-left: none;
+				border-right: none;
+				border-top: none;
+				outline: none;
+			}
+
+			.slider .action {
+				opacity: 1;
+			}
+
+			.slider .action.disabled {
+				opacity: 0.75;
+			}
+
+			/** SLIDES CSS **/
+			.slides-container {
+				height: 100vh;
+				width: 100vw;
+				background-color: #000000;
+				position: absolute;
+				top: 0;
+				left: 0;
+				margin: 0;
+				z-index: -2;
+
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.slides-container .slide {
+				height: 100%;
+				/* background-color: #9d00fa; */
+				background: url(./images/hero.jpg);
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: cover;
+				transition: flex 1s ease-in-out;
+			}
+
+			.slides-container .slide.active {
+				flex: 1;
+			}
+
+			.arrow {
+				width: 100%;
+				transform: translate(-50%, -50%);
+				transform: rotate(360deg);
+				cursor: pointer;
+				width: 2rem;
+				transform: rotate(-90deg);
+			}
+
+			.arrow span {
+				display: block;
+				width: 1.5vw;
+				height: 1.5vw;
+				border-bottom: 5px solid white;
+				border-right: 5px solid white;
+				transform: rotate(90deg);
+				margin: -10px;
+				animation: animate 2s infinite;
+			}
+
+			.arrow span:nth-child(2) {
+				animation-delay: -0.2s;
+			}
+
+			.arrow span:nth-child(3) {
+				animation-delay: -0.4s;
+			}
+
+			@keyframes animate {
+				0% {
+					opacity: 0;
+					transform: rotate(45deg) translate(-20px, -20px);
+				}
+				50% {
+					opacity: 1;
+				}
+				100% {
+					opacity: 0;
+					transform: rotate(45deg) translate(20px, 20px);
+				}
+			}
+
+			body {
+				width: 100vw;
+				height: 100vh;
+				position: relative;
+				overflow: hidden;
+				overflow-y: scroll;
+			}
+
+			a {
+				text-decoration: none;
+				color: inherit;
+			}
+
+			header {
+				width: 100%;
+				display: flex;
+				justify-content: space-between;
+				padding: 2% 10% 0 10%;
+				align-items: center;
+				background: none;
+				position: absolute;
+				z-index: 50;
+			}
+
+			header i {
+				color: white;
+			}
+
+			.logo-container {
+				max-height: 45px;
+			}
+
+			.logo {
+				height: 100%;
+				max-height: 45px;
+				object-fit: contain;
+			}
+
+			.menu {
+				display: flex;
+				justify-content: space-around;
+				align-items: center;
+				gap: 3rem;
+			}
+
+			.menu ul {
+				list-style-type: none;
+				display: inline-flex;
+				justify-content: space-around;
+				align-items: center;
+				gap: 2rem;
+			}
+
+			.menu-item {
+				font-size: large;
+				font-weight: 600;
+				padding: 0.25rem 0.5rem;
+				color: white;
+			}
+
+			.menu-item::after {
+				content: '';
+				display: block;
+				width: 0;
+				margin-top: 0.3rem;
+				height: 0.15rem;
+				background: linear-gradient(to right, #ff006f, #9d00fa);
+				transition: width 0.3s;
+			}
+			.active::after {
+				width: 120%;
+				transform: translateX(-5%);
+			}
+			.menu-item:hover::after {
+				width: 120%;
+				transform: translateX(-5%);
+			}
+
+			.menu svg {
+				color: aliceblue;
+				font-size: large;
+			}
+
+			.more {
+				display: none;
+			}
+
+			.menu-item .expand {
+				display: none;
+				position: absolute;
+				min-width: 500px;
+				padding: 1rem;
+				background-color: white;
+				margin-top: 1rem;
+				justify-content: start;
+				align-items: start;
+				gap: 1rem;
+			}
+
+			.menu-item:hover .expand {
+				display: flex;
+			}
+
+			.menu-item .expand > div {
+				display: flex;
+				flex-direction: column;
+				align-items: start;
+				gap: 1rem;
+			}
+
+			.menu-item .expand > div:nth-child(2) {
+				flex: 2;
+			}
+
+			.menu-item .expand > div .title {
+				color: #fff;
+				font-size: large;
+				font-weight: 700;
+				text-decoration: underline;
+			}
+
+			.menu-item .expand > div .info {
+				font-size: medium;
+				opacity: 0.75;
+			}
+
+			.menu-item .expand > div .info ul {
+				display: flex;
+				flex-direction: column;
+				align-items: start;
+				gap: 1rem;
+			}
+
+			.menu-item .expand > div .info li.highlight {
+				opacity: 1;
+			}
+
+			.nav-line {
+				height: 50%;
+				position: fixed;
+				left: 5%;
+				top: 50%;
+				transform: translateY(-50%);
+				width: 2px;
+				background-color: white;
+				z-index: 50;
+			}
+
+			.nav-line .line {
+				position: relative;
+				width: 100%;
+				height: 100%;
+			}
+
+			.pointer {
+				position: absolute;
+				width: 20px;
+				height: 20px;
+				background-color: transparent;
+				border: 2px solid white;
+				border-radius: 50%;
+				top: 0;
+				transform: translate(-45%, -50%);
+				z-index: 50;
+			}
+
+			.nav-line ul {
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				align-items: center;
+				list-style-type: none;
+			}
+
+			.nav-line .point {
+				position: relative;
+			}
+
+			.nav-line .point::after {
+				content: '';
+				width: 10px;
+				height: 10px;
+				border-radius: 50%;
+				background-color: white;
+				position: absolute;
+				transform: translateX(-50%);
+			}
+
+			.nav-line .point.active::after {
+				transform: translate(-50%, -50%);
+			}
+
+			.nav-line .point .label {
+				position: absolute;
+				transform: rotate(-90deg);
+				font-size: medium;
+				font-weight: 500;
+				color: white;
+				display: none;
+			}
+
+			.nav-line .point.active .label {
+				display: block;
+			}
+
+			main {
+				width: 100vw;
+				height: 100vh;
+				position: relative;
+				z-index: 0;
+				scroll-snap-type: y mandatory;
+				overflow-y: scroll;
+				scroll-behavior: smooth; /* Add smooth scroll behavior */
+				scroll-snap-points-y: repeat(100%);
+			}
+
+			section,
+			footer {
+				scroll-snap-align: start;
+			}
+
+			section {
+				position: relative;
+				padding-right: 10%;
+				padding-left: 10%;
+			}
+
+			.overlay {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				color: white;
+				opacity: 0.08;
+				top: 0;
+				left: 0;
+				z-index: 0;
+			}
+
+			.overlay .word {
+				font-size: 8rem;
+				font-weight: normal;
+				position: absolute;
+				text-transform: uppercase;
+			}
+
+			.overlay .word:nth-child(1) {
+				top: 5%;
+				left: 5%;
+				/* transform: translate(-50%); */
+			}
+
+			.overlay .word:nth-child(2) {
+				bottom: 0;
+				right: 5%;
+				/* transform: translate(-50%); */
+			}
+
+			.home {
+				width: 100vw;
+				height: 100vh;
+
+				display: flex;
+				justify-content: flex-end;
+				align-items: center;
+
+				padding: 3rem;
+				position: relative;
+				z-index: -2;
+			}
+
+			.home::before {
+				content: '';
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				inset: 0;
+				background-image: radial-gradient(
+					farthest-corner at 50% 50%,
+					#a9a5ac 2%,
+					#000000 50%
+				);
+				
+				mix-blend-mode: hard-light;
+				opacity: 1;
+				z-index: -1;
+			}
+
+			.home::after {
+				content: '';
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				inset: 0;
+				background: url(./images/dot.png);
+				background-position: center;
+				background-repeat: repeat;
+				z-index: -1;
+				opacity: 0.5;
+			}
+
+			.home .overlay .word:nth-child(1) {
+				top: 10%;
+				left: 60%;
+				transform: translate(-50%);
+			}
+
+			.home .overlay .word:nth-child(2) {
+				bottom: 8%;
+				left: 81%;
+				transform: translate(-50%);
+			}
+
+			.home .arrow {
+				position: absolute;
+				left: 10%;
+				bottom: 10%;
+				transform: rotate(0deg);
+			}
+
+			.home .content {
+				display: inline-flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: flex-end;
+				gap: 1rem;
+				padding-right: 10%;
+				z-index: 0;
+			}
+
+			.home .content .year {
+				font-size: x-large;
+				font-weight: 700;
+				color: white;
+				padding: 0.5rem 1rem;
+				border: 2px solid aqua;
+				border-top-right-radius: 1rem;
+				border-bottom-left-radius: 1rem;
+			}
+
+			.home .content .info {
+				display: inline-flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: flex-end;
+				gap: 1rem;
+				padding: 0 2rem;
+				border-right: 0.2rem solid white;
+			}
+
+			.home .content .info .title {
+				font-size: xx-large;
+				font-weight: 800;
+				text-align: right;
+			}
+
+			 .home .content .info .description {
+				font-size: medium;
+				font-weight: 500;
+				color: white;
+				text-align: right;
+			} 
+
+			.content .hashtag {
+				font-size: x-large;
+				font-weight: 600;
+				color: white;
+			}
+
+			.business {
+				width: 100vw;
+				height: 100vh;
+				background: black;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-around;
+				align-items: center;
+				padding: 0 10% 0 10%;
+				position: relative;
+			}
+
+			.header {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				gap: 1.5rem;
+			}
+
+			.header .title {
+				font-size: xx-large;
+				font-weight: 800;
+				font-style: italic;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				gap: 1.5rem;
+			}
+
+			.header .description {
+				font-size: large;
+				font-weight: 500;
+				color: white;
+				text-align: center;
+			}
+
+			.business {
+				justify-content: center;
+				gap: 5rem;
+			}
+			.business .catalog {
+				height: 60%;
+				width: 100%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				gap: 1.5rem;
+			}
+
+			.business .catalog .card,
+			.business .catalog .info {
+				flex: 1;
+				height: 100%;
+				width: 100%;
+				background-color: white;
+				border: 3px solid;
+				border-image-source: linear-gradient(
+					to right,
+					#ff006f,
+					#9d00fa
+				);
+				border-image-slice: 1;
+				position: relative;
+				transition: order 1s ease-in-out 0.5s, flex 1s ease-in-out,
+					overflow 1s ease-in-out;
+			}
+
+			.business .catalog .info {
+				flex: 0;
+				position: relative;
+				overflow: hidden;
+				display: flex;
+				flex-direction: column;
+				justify-content: flex-end;
+				align-items: flex-end;
+				background-color: black;
+			}
+
+			.business .catalog .info.show {
+				width: 100%;
+				flex: 2.5;
+				background-color: black;
+				 border: 3px solid; 
+				border-image-source: linear-gradient(
+					to right,
+					#ff006f,
+					#9d00fa
+				);
+				border-image-slice: 1;
+			}
+
+			.business .catalog .info .face {
+				flex: 0;
+				overflow: hidden;
+			}
+
+			.business .catalog .info .face .title {
+				max-width: 200px;
+				text-align: right;
+				word-wrap: break-word;
+			}
+
+			.business .catalog .info .face.active {
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-around;
+				align-items: flex-end;
+			}
+
+			.business .catalog .card.active {
+				flex: 1.5;
+			}
+
+			.business .catalog .card img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+
+			.business .catalog .card > .title {
+				color: white;
+				position: absolute;
+				font-size: medium;
+				font-weight: 600;
+				top: 0;
+				left: 50%;
+				transform: translateX(-70%);
+				margin: 1rem;
+				padding: 0 0.3rem;
+				border-left: 5px solid;
+				border-image-source: linear-gradient(
+					to right,
+					#ff006f,
+					#9d00fa
+				);
+				border-image-slice: 1;
+			}
+
+			.business .catalog .card .index {
+				position: absolute;
+				font-size: x-large;
+				font-weight: 700;
+				color: white;
+				bottom: 0;
+				margin: 1rem;
+			}
+
+			.business .catalog .info .content {
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-around;
+				align-items: flex-end;
+				padding: 1rem;
+			}
+
+			.business .catalog .info .content .title {
+				font-size: x-large;
+				font-weight: 700;
+				color: white;
+				text-align: right;
+			}
+
+			.business .catalog .info .content .description {
+				font-size: medium;
+				font-weight: 400;
+				color: white;
+				text-align: right;
+			}
+
+			.career {
+				width: 100vw;
+				height: 100vh;
+				background: url(./images/2.jpg);
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: cover;
+				position: relative;
+				padding: 0 10% 0 10%;
+				z-index: -2;
+			}
+
+			.career::before {
+				content: '';
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				inset: 0;
+				background-image: radial-gradient(
+					farthest-corner at 35% -60%,
+					#e5e4ee 10%,
+					#a9a5ac 20%,
+					#6e6b6e 30%,
+					#383637 50%,
+					#000000 80%
+				);
+				mix-blend-mode: hard-light;
+				opacity: 1;
+				z-index: -1;
+			}
+
+			.career > .arrow {
+				height: 2rem !important;
+				width: 2rem !important;
+				position: absolute;
+				/* top: 50%; */
+				right: 15%;
+				bottom: 5%;
+				padding: 0;
+			}
+
+			.career .overlay .word:nth-child(1) {
+				font-weight: 900;
+				bottom: 0;
+				left: 15%;
+				transform: rotate(-90deg) translateY(20%) translateX(-50%);
+			}
+
+			.career > div {
+				width: 100%;
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-around;
+				align-items: center;
+				padding: 5rem;
+				padding-left: 10%;
+				z-index: 900;
+			}
+
+			.career .header {
+				align-self: flex-end;
+			}
+
+			.career .content {
+				width: 100%;
+				height: 100%;
+				display: flex;
+				justify-content: space-around;
+				align-items: flex-end;
+				gap: 2.5rem;
+			}
+
+			.career .content > div:nth-child(1) {
+				display: flex;
+				flex-direction: column;
+				justify-content: flex-end;
+				align-items: flex-start;
+				gap: 0.75rem;
+				flex: 0.5;
+			}
+			.career .content > div:nth-child(2) {
+				width: 100%;
+				height: 100%;
+				display: flex;
+				gap: 2rem;
+				flex: 1;
+			}
+			.career .content .hashtag {
+				font-size: xx-large;
+				padding-bottom: 1rem;
+			}
+
+			.career .content .title {
+				font-size: x-large;
+				font-weight: 500;
+				color: white;
+			}
+
+			.career .content .description {
+				font-size: medium;
+				font-weight: 400;
+				color: white;
+			}
+
+			.career .content .card {
+				max-width: 750px;
+				min-width: 250px;
+				width: 100%;
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				transform: scale(0.9);
+				transition: all 1s ease-in-out;
+				overflow: hidden;
+			}
+
+			.career .content .card .face {
+				flex: 0;
+				height: 0px;
+				width: 100%;
+				display: none;
+				flex-direction: column;
+				justify-content: center;
+				align-items: flex-start;
+				gap: 1.5rem;
+				padding: 0;
+				position: relative;
+				transition: flex 0.5s ease-in-out, height 0.5s ease-in-out,
+					overflow 0.5s ease-in-out, padding 0.5s ease-in-out;
+			}
+
+			.career .content .card .face.show {
+				flex: 1 !important;
+				height: 100% !important;
+				padding: 1.5rem 2rem;
+				display: flex;
+			}
+
+			.career .content .card:nth-child(1) .face {
+				flex-direction: column-reverse;
+			}
+
+			.career .content .card .face .hashtag {
+				font-size: x-large;
+			}
+
+			.career .content .card .face .info {
+				font-size: medium;
+				padding: 0 1rem;
+				border-left: 3px solid;
+				border-image-source: linear-gradient(
+					to right,
+					#ff006f,
+					#9d00fa
+				);
+				border-image-slice: 1;
+			}
+
+			.career .content .card:nth-child(1) .face:nth-child(1),
+			.career .content .card:nth-child(1) .face:nth-child(3) {
+				background-color: white;
+				color: black;
+			}
+
+			.career
+				.content
+				.card:nth-child(1)
+				.face:nth-child(1).triangle::after,
+			.career
+				.content
+				.card:nth-child(1)
+				.face:nth-child(3).triangle::after {
+				border-top-color: #fff;
+			}
+
+			.career .content .card:nth-child(1) .face:nth-child(2),
+			.career .content .card:nth-child(1) .face:nth-child(4) {
+				background-color: black;
+				color: white;
+			}
+
+			.career .content .card:nth-child(1) .face.show:nth-child(1),
+			.career .content .card:nth-child(1) .face.show:nth-child(3) {
+				flex: 1 !important;
+			}
+
+			.career .content .card:nth-child(1) .face.show:nth-child(2),
+			.career .content .card:nth-child(1) .face.show:nth-child(4) {
+				flex: 1.5 !important;
+			}
+
+			.career
+				.content
+				.card:nth-child(1)
+				.face:nth-child(2).triangle::after,
+			.career
+				.content
+				.card:nth-child(1)
+				.face:nth-child(4).triangle::after {
+				border-top-color: #000;
+			}
+
+			.career .content .card:nth-child(1) .face:nth-child(1) .hashtag,
+			.career .content .card:nth-child(1) .face:nth-child(3) .hashtag {
+				color: black;
+			}
+
+			.triangle::after {
+				content: '';
+				position: absolute;
+				bottom: 0;
+				right: 15%;
+				transform: translateY(100%);
+				border-left: 20px solid transparent;
+				border-right: 20px solid transparent;
+				border-top: 20px solid #fff;
+				clear: both;
+				z-index: 50;
+			}
+
+			.career .content .card:nth-child(2) .triangle::after {
+				top: 0;
+				right: 15%;
+				transform: translateY(-100%) rotate(180deg);
+			}
+
+			.career .content .card:nth-child(2) .face:nth-child(1),
+			.career .content .card:nth-child(2) .face:nth-child(3) {
+				background-color: white;
+				color: black;
+			}
+			.career
+				.content
+				.card:nth-child(2)
+				.face:nth-child(1).triangle::after,
+			.career
+				.content
+				.card:nth-child(2)
+				.face:nth-child(3).triangle::after {
+				border-top-color: #fff;
+			}
+
+			.career .content .card:nth-child(2) .face:nth-child(2),
+			.career .content .card:nth-child(2) .face:nth-child(4) {
+				background-color: purple;
+				color: white;
+			}
+			.career
+				.content
+				.card:nth-child(2)
+				.face:nth-child(2).triangle::after,
+			.career
+				.content
+				.card:nth-child(2)
+				.face:nth-child(4).triangle::after {
+				border-top-color: purple;
+			}
+
+			.career .content .card:nth-child(2) .face.show:nth-child(1),
+			.career .content .card:nth-child(2) .face.show:nth-child(3) {
+				flex: 1.5 !important;
+			}
+
+			.career .content .card:nth-child(2) .face.show:nth-child(2),
+			.career .content .card:nth-child(2) .face.show:nth-child(4) {
+				flex: 1 !important;
+			}
+
+			.career .content .card:nth-child(2) .face:nth-child(1) .hashtag,
+			.career .content .card:nth-child(2) .face:nth-child(3) .hashtag {
+				color: black;
+			}
+
+			.career .content .card:nth-child(2) .face:nth-child(1)::after {
+				content: '';
+				position: absolute;
+				width: 0;
+				height: 0;
+				bottom: 0;
+				right: 15%;
+				transform: translateY(100%);
+				border-left: 20px solid transparent;
+				border-right: 20px solid transparent;
+				border-top: 20px solid #fff;
+				clear: both;
+				z-index: 20;
+			}
+
+			.news {
+				width: 100vw;
+				height: 100vh;
+				background: black;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-evenly;
+				align-items: flex-start;
+				padding: 0 10% 0 10%;
+			}
+
+			.news .overlay .word:nth-child(1) {
+				left: 50%;
+				transform: translateX(-50%);
+			}
+
+			.news .overlay .word:nth-child(2) {
+				top: 60%;
+				right: 0%;
+				transform: rotate(90deg) translate(-60%, -0%);
+			}
+
+			.news .overlay .word:nth-child(3) {
+				top: 50%;
+				left: -10%;
+				transform: rotate(-90deg);
+			}
+
+			.news .header {
+				padding-left: 15%;
+			}
+
+			.news .feed {
+				width: 100%;
+				max-height: 65%;
+				display: flex;
+				justify-content: space-evenly;
+				align-items: stretch;
+				gap: 2rem;
+				background-color: #000000;
+				z-index: 3;
+			}
+
+			.news .feed .card {
+				width: 100%;
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				align-items: center;
+
+				border: 3px solid;
+				border-image-source: linear-gradient(
+					to right,
+					#ff006f,
+					#9d00fa
+				);
+				border-image-slice: 1;
+			}
+
+			.news .feed .card:nth-child(2n) {
+				flex-direction: column-reverse;
+			}
+
+			.news .feed .card .thumbnail {
+				width: 100%;
+				object-fit: contain;
+				position: relative;
+				z-index: 1;
+			}
+
+			.news .feed .card .thumbnail::after {
+				content: '';
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				top: 0;
+				right: 0;
+				inset: 0;
+				background-image: radial-gradient(
+					farthest-corner at 0% 0%,
+					#a9a5ac 40%,
+					#6e6b6e 70%,
+					#383637 80%,
+					#000000 90%
+				);
+				mix-blend-mode: hard-light;
+				opacity: 0.5;
+				z-index: 5;
+			}
+
+			.news .feed .card .content:nth-child(odd) {
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: flex-start;
+				gap: 0.5rem;
+				padding: 1rem;
+			}
+
+			.news .feed .card .content:nth-child(even) {
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: flex-start;
+				gap: 0.5rem;
+				padding: 1rem;
+			}
+
+			.news .feed .card .content .title {
+				font-size: large;
+				font-weight: 600;
+				color: white;
+			}
+
+			.news .feed .card .content .info {
+				font-size: small;
+				font-weight: 600;
+				color: white;
+				padding: 0 0.5rem;
+				border-left: 3px solid;
+				border-image-source: linear-gradient(
+					to right,
+					#ff006f,
+					#9d00fa
+				);
+				border-image-slice: 1;
+			}
+
+			.news .banner {
+				width: 100%;
+				height: 15%;
+				align-self: center;
+				display: flex;
+				justify-content: space-around;
+				align-items: center;
+				gap: 1rem;
+				padding: 1rem;
+				border: 3px solid;
+				border-image-source: linear-gradient(
+					to right,
+					#ff006f,
+					#9d00fa
+				);
+				border-image-slice: 1;
+				overflow: hidden;
+			}
+
+			.news .banner > div:nth-child(1) {
+				height: 200px;
+				overflow: hidden;
+				object-fit: contain;
+				transform: scale(0.9);
+			}
+
+			.news .banner > div:nth-child(1) img {
+				height: 100%;
+				object-fit: contain;
+			}
+
+			.news .banner > div {
+				display: flex;
+				flex-direction: column;
+				justify-content: space-around;
+				align-items: center;
+				gap: 1rem;
+				padding: 1rem;
+			}
+
+			.news .banner .title {
+				font-size: x-large;
+				font-weight: 700;
+			}
+
+			.news .banner .sub-title {
+				font-size: large;
+				font-weight: 500;
+				color: white;
+			}
+
+			.brands {
+				width: 100vw;
+				height: 100vh;
+				position: relative;
+				z-index: -2;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-evenly;
+				align-items: flex-start;
+				gap: 2rem;
+				padding: 5rem;
+				padding-left: 10%;
+				padding-bottom: 1rem;
+			}
+
+			.brands::before {
+				content: '';
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				inset: 0;
+				background: radial-gradient(
+					circle at top right,
+					#ffffff00 10%,
+					#000000 100%
+				);
+				mix-blend-mode: hard-light;
+				opacity: 1;
+				z-index: -1;
+			}
+
+			.brands::after {
+				content: '';
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				inset: 0;
+				background: url(./images/dot.png);
+				background-position: center;
+				background-repeat: repeat;
+				z-index: -1;
+				opacity: 0.5;
+			}
+
+			.brands .overlay .word:nth-child(1) {
+				transform: rotate(90deg) translate(45%, 0);
+				left: 65%;
+			}
+
+			.brands .overlay .word:nth-child(2) {
+				left: 10%;
+				bottom: 15%;
+			}
+
+			.brands .slides-container {
+				height: 100vh;
+				width: 100vw;
+				background-color: #000000;
+				position: absolute;
+				top: 0;
+				left: 0;
+				margin: 0;
+				z-index: -2;
+
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.brands .slides-container .slide {
+				height: 100%;
+				background: url(./images/4th.jpg);
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: cover;
+				transition: flex 1s ease-in-out;
+			}
+
+			.brands .slides-container .slide.active {
+				flex: 1;
+			}
+
+			.brands .content {
+				height: 100%;
+				max-width: 40%;
+				display: flex;
+				flex-direction: column;
+				justify-content: flex-start;
+				align-items: flex-start;
+				gap: 1.5rem;
+			}
+			.brands .content .box {
+				padding: 1rem 1.5rem;
+				font-size: large;
+				font-weight: 600;
+				color: white;
+				border: 2px aqua solid;
+			}
+
+			.brands .content .info {
+				display: flex;
+				flex-direction: column;
+				justify-content: space-evenly;
+				align-items: flex-start;
+				gap: 1rem;
+				padding: 1rem;
+				border-left: 2px solid white;
+				font-size: medium;
+				color: white;
+			}
+
+			.brands .content .info .title {
+				font-size: xx-large;
+				font-weight: 800;
+				color: aqua;
+			}
+
+			.brands .content .hashtag {
+				font-size: x-large;
+				font-weight: 700;
+			}
+
+			footer {
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				align-items: center;
+				gap: 3rem;
+				padding: 1rem 2rem;
+				background-color: black;
+				color: white;
+				position: relative;
+			}
+
+			footer .company-info {
+				width: 100%;
+				display: flex;
+				justify-content: space-around;
+				align-items: center;
+			}
+
+			footer .company-info .logo-container {
+				height: 50px;
+			}
+
+			footer .company-info .logo-container .logo {
+				height: 100%;
+				object-fit: contain;
+			}
+
+			footer .company-info .links {
+				display: flex;
+				justify-content: space-around;
+				align-items: center;
+				gap: 1rem;
+			}
+
+			footer .company-info .links a {
+				height: 20px;
+				width: 20px;
+				padding: 1rem;
+				border-radius: 50%;
+				background-color: white;
+				display: flex;
+				justify-content: space-around;
+				align-items: center;
+			}
+
+			footer .company-info .links a svg {
+				color: #000000;
+			}
+
+			footer .company-info .subscribe {
+				/* padding: 0.5rem; */
+				/* font-size: 1rem;
+				font-weight: 700; */
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				padding: 0.5rem 1rem;
+				/* background: linear-gradient(to right, #ff006f, #9d00fa); */
+			}
+
+			footer .company-info .subscribe input,
+			footer .company-info .subscribe button {
+				color: white;
+				font-size: 1rem;
+				font-weight: 700;
+				background: none;
+				border: none;
+				text-decoration: none;
+				outline: none;
+			}
+
+			footer .company-info .subscribe input {
+				width: 200px;
+			}
+
+			footer .company-info .subscribe input::placeholder {
+				/* Chrome, Firefox, Opera, Safari 10.1+ */
+				color: white;
+				opacity: 1; /* Firefox */
+			}
+
+			footer .company-info .subscribe button {
+				padding: 0.5rem 1rem;
+				/* background: linear-gradient(to right, #ff006f, #9d00fa); */
+				/* border: none; */
+			}
+
+			footer > .container {
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-around;
+				align-items: center;
+				gap: 1rem;
+			}
+
+			footer .backtext {
+				text-align: center;
+			}
+
+			footer > .container > .container {
+				max-width: 1000px;
+				width: 100%;
+				display: flex;
+				justify-content: space-around;
+				align-items: start;
+				gap: 5rem;
+			}
+
+			footer .container > .container > div {
+				display: flex;
+				flex-direction: column;
+				justify-content: space-around;
+				align-items: start;
+				gap: 1rem;
+			}
+
+			footer .container > .container > div > h6 {
+				font-size: large !important;
+			}
+
+			footer .container > .container > div > ul {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: start;
+				gap: 0.5rem;
+				font-size: medium;
+				list-style: none;
+			}
+
+			footer > .container .container .highlight {
+				font-size: large;
+				font-weight: 700;
+			}
+
+			footer .overlay {
+				z-index: -1;
+			}
+
+			footer .overlay .word:nth-child(1) {
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
+
+			.copyrights {
+				text-align: center;
+			}
+
+			footer .overlay .word:nth-child(1) {
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				text-align: center;
+				opacity: 0.2;
+			}
+
+			@media (max-width: 425px) {
+				html {
+					min-width: -webkit-fill-available;
+					min-height: -webkit-fill-available;
+				}
+
+				body {
+					min-width: -webkit-fill-available;
+					min-height: -webkit-fill-available;
+					width: 100vw;
+					height: 100vh;
+					overflow: hidden;
+					overflow-y: scroll;
+				}
+
+				header {
+					justify-content: space-between;
+					padding: 0.5rem 1rem;
+				}
+
+				.logo-container {
+					max-height: 30px;
+				}
+
+				.logo {
+					max-height: 30px;
+				}
+
+				.more {
+					display: block;
+				}
+
+				.menu {
+					display: none;
+					height: 0;
+					width: 100%;
+					position: absolute;
+					top: 0;
+					right: 0;
+					justify-content: end;
+					padding: 4rem 2rem;
+					padding-bottom: 2rem;
+					background-color: rgba(0, 0, 0, 0.75);
+					z-index: -1;
+					transition: height 0.8s ease-in-out,
+						display 0.8s ease-in-out;
+				}
+
+				.menu.active {
+					display: flex;
+					height: auto;
+				}
+
+				.menu ul {
+					flex-direction: column;
+					align-items: flex-end;
+					gap: 1rem !important;
+				}
+
+				.nav-line .point {
+					position: relative;
+				}
+
+				.nav-line .point::after {
+					width: 5px;
+					height: 5px;
+				}
+
+				.nav-line .point.active {
+					padding: 5px;
+					transform: translateY(-50%);
+					border-width: 2px;
+				}
+
+				.nav-line .point.active::after {
+					transform: translate(-50%, -50%);
+				}
+
+				.nav-line .point .label {
+					display: none !important;
+					transform: rotate(-90deg);
+					font-size: x-small;
+					font-weight: 300;
+				}
+
+				main {
+					width: 100%;
+					height: 100%;
+					position: relative;
+				}
+
+				.overlay .word {
+					font-size: 3rem;
+				}
+
+				.overlay .word:nth-child(1) {
+					top: 10%;
+					left: 5%;
+				}
+
+				.overlay .word:nth-child(2) {
+					bottom: 0;
+					right: 15%;
+				}
+
+				section > .content {
+					transform: scale(0.85);
+				}
+
+				section > .header {
+					transform: scale(0.85);
+				}
+
+				.home {
+					padding: 10%;
+					justify-content: flex-end;
+				}
+
+				.home::before {
+					background-image: radial-gradient(
+						farthest-corner at 200% 700%,
+						#a9a5ac 10%,
+						#6e6b6e 50%,
+						#383637 60%,
+						#000000 100%
+					);
+					mix-blend-mode: hard-light;
+					opacity: 0.5;
+				}
+
+				.home .content {
+					align-items: flex-end;
+				}
+
+				.business {
+					max-width: 100vw;
+					height: auto;
+					gap: 1.5rem;
+					padding: 2rem 1rem;
+					padding-left: 10%;
+					position: relative;
+					overflow: hidden;
+					overflow-x: scroll;
+				}
+
+				.header {
+					gap: 1rem;
+				}
+
+				.header .title {
+					font-size: xx-large;
+					font-weight: 800;
+					gap: 0.5rem;
+				}
+
+				.header .description {
+					font-size: large;
+					font-weight: 600;
+					text-align: left;
+				}
+
+				.business .catalog {
+					flex-direction: column;
+					gap: 0.5rem;
+				}
+
+				.business .catalog > .card,
+				.business .catalog > .info {
+					max-height: 300px !important;
+					object-fit: cover;
+					overflow: hidden;
+					transition: display 1s ease-in-out, flex 1s ease-in-out;
+				}
+
+				.business .catalog .info {
+					flex: 0;
+					max-height: 0;
+					overflow: hidden;
+					flex-basis: 0;
+				}
+
+				.business .catalog .info.show {
+					flex: 1;
+					flex-basis: 1;
+					height: 100%;
+				}
+
+				.business .catalog > .card img {
+					max-height: 300px;
+					object-fit: cover;
+				}
+
+				.business .catalog .info .face {
+					display: none;
+				}
+
+				.business .catalog .info .face.active {
+					flex: 1;
+					display: flex;
+					flex-direction: column;
+					justify-content: space-around;
+					align-items: flex-end;
+				}
+
+				.business .catalog .info .content .title {
+					font-size: large;
+					font-weight: 600;
+				}
+
+				.business .catalog .info .content .description {
+					font-size: small;
+					font-weight: 300;
+				}
+
+				.business .catalog .card.active {
+					flex: 1.5;
+				}
+
+				.career {
+					max-width: 100vw;
+					height: auto;
+					padding: 2rem 1rem;
+					padding-left: 10%;
+				}
+
+				.career > div {
+					padding: 0;
+				}
+
+				.career .content {
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: flex-end;
+					gap: 2rem;
+				}
+
+				.career .content > div:nth-child(2) {
+					display: flex;
+					flex-direction: column;
+					gap: 0.5rem;
+				}
+
+				.career .content .card {
+					height: 700px;
+				}
+
+				.career .content .card .info {
+					flex-shrink: 0;
+				}
+
+				.career .content .card .face {
+					display: none;
+				}
+
+				.career .content .card .face.show {
+					display: flex;
+				}
+
+				.news {
+					width: 100vw;
+					height: auto;
+					gap: 1.5rem;
+					padding: 10%;
+				}
+
+				.news .feed {
+					height: auto;
+					flex-direction: column;
+				}
+
+				.news .banner {
+					width: 100%;
+					height: auto;
+					flex-direction: column;
+				}
+
+				.brands {
+					height: auto;
+					gap: 1rem;
+					padding: 10%;
+				}
+
+				.brands > div {
+					min-width: 100%;
+				}
+
+				footer {
+					gap: 1rem;
+					padding: 1rem;
+					padding-top: 2rem;
+				}
+
+				footer .company-info {
+					flex-wrap: wrap;
+					gap: 1rem;
+				}
+
+				footer .company-info .subscribe {
+					font-size: medium;
+				}
+
+				footer > .container {
+					transform: scale(0.8);
+				}
+
+				footer > .container > .container {
+					flex-direction: column;
+					gap: 3rem;
+					justify-content: center;
+					align-items: center;
+					flex-wrap: wrap;
+				}
+
+				footer > .container > .container > div {
+					align-items: center;
+				}
+
+				footer > .container > .container > div > ul {
+					align-items: center;
+				}
+			} 
+		</style>
+	</head>
+	<body>
+		<header>
+			<div class="logo-container">
+				<a href="#">
+					<img src="./images/rpnew.png" alt="logo" class="logo" />
+				</a>
+			</div>
+			<div class="menu">
+				<ul>
+					<li class="menu-item active">
+						<a href="#">Business</a>
+						
+					</li>
+					<li class="menu-item">
+						<a href="#">Career</a>
+					</li>
+					<li class="menu-item">
+						<a href="#">About Us</a>
+					</li>
+					<li class="menu-item">
+                        <a href="#">Media</a></li>
+					<li class="menu-item">
+						<a href="#">Contact</a>
+					</li>
+					<li><i class="fa-solid fa-magnifying-glass"></i></li>
+				</ul>
+			</div>
+			
+		</header>
+<!--   hear section end-->
+
+
+		<div class="nav-line">
+			<div class="line">
+				<span class="pointer"></span>
+				<ul>
+					<a href="#home">
+						<li class="point active">
+							<!-- <a href="#career"></a> -->
+							<div class="label">Home</div>
+						</li>
+					</a>
+					<a href="#business">
+						<li class="point"><div class="label">Business</div></li>
+					</a>
+					<a href="#career">
+						<li class="point"><div class="label">Career</div></li>
+					</a>
+					<a href="#news">
+						<li class="point"><div class="label">News</div></li>
+					</a>
+					<a href="#brands">
+						<li class="point"><div class="label">Brands</div></li>
+					</a>
+				</ul>
+			</div>
+		</div>
+
+		<main>
+			<section class="home" id="home" data-index="1">
+				<div class="slides-container">
+					<div class="slide active"></div>
+					<div class="slide"></div>
+					<div class="slide"></div>
+				</div>
+				<div class="overlay">
+					<div class="word">Transport</div>
+					<div class="word">#2</div>
+				</div>
+				<div class="content">
+					<div class="year">2023</div>
+					<div class="info">
+						<div class="title highlight">
+							Connecting Your Buisness To a<br />
+							World of Possibilities
+						</div>
+						<div class="description">
+							Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestiae, eius?,<br />
+							Lorem ipsum dolor sit amet.<br />
+							Lorem ipsum dolor sit amet.<br />
+							Lorem ipsum dolor sit amet consectetur adipisicing.<br />
+							Lorem, ipsum dolor.
+						</div>
+					</div>
+					<div class="hashtag">#Redfantomgoal</div>
+					<div class="read_more_sec">
+						<h4>READ MORE</h4>
+						<div class="read_more_arrow">
+							<i class="fa-solid fa-arrow-right fa-xl"></i>
+						</div>
+					</div>
+					<div class="slider" id="one">
+						<button class="action">Prev</button>
+						<div class="display">2</div>
+						<button class="action">Next</button>
+					</div>
+				</div>
+				<div class="arrow">
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+			</section>
+
+			<section class="business" id="business" data-index="2">
+				<div class="overlay">
+					<div class="word">Business</div>
+					<div class="word">Oppurtunities</div>
+				</div>
+				<div class="header">
+					<div class="title highlight">
+						Presence That Has an Impact
+						<div class="arrow">
+							<span></span>
+							<span></span>
+							<span></span>
+						</div>
+					</div>
+					<div class="description">
+						Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum, unde.<br />
+						Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+						Lorem ipsum dolor sit amet.
+					</div>
+				</div>
+				<div class="catalog">
+					<div class="card active" data-index="1">
+						<div class="title" data-index="1">Technology</div>
+						<img
+							src="./images/premium.jpg"
+							alt="finance"
+							data-index="1"
+						/>
+						<div class="index" data-index="1">#1</div>
+					</div>
+					<div class="info show">
+						<div class="content">
+							<div class="face active">
+								<div class="title">
+									Hello I hope you are good
+								</div>
+								<div class="description">
+									Lorem ipsum dolor sit amet consectetur, 
+									adipisicing elit. Dolores aut quidem corporis odio vitae expedita?
+									Lorem ipsum dolor sit amet.
+								</div>
+								<div class="hashtag">#Ankit jha</div>
+							</div>
+							<div class="face">
+								<div class="title">
+									RedPhantom Transportation Services
+								</div>
+								<div class="description">
+									For more than 40 years, RP Transportation
+									has provided safe, reliable, affordable
+									transportation services to cities,
+									countries, municipalities, and other
+									jurisdictional entities, as well as private
+									corporations, non-profit agencies, and
+									community organizations.
+								</div>
+								<div class="hashtag">#transportation</div>
+							</div>
+							<div class="face">
+								<div class="title">
+									For more Finance contact RedPhantom
+								</div>
+								<div class="description">
+									Finance is a term broadly describing the
+									study and system of money, investments, and
+									other financial instruments. Finance can be
+									divided broadly into three distinct
+									categories: public finance, corporate
+									finance, and personal finance. More recent
+									subcategories of finance include social
+									finance and behavioralfinance.
+								</div>
+								<div class="hashtag">#finance</div>
+							</div>
+							<div class="face">
+								<div class="title">
+									For more than 10years RP E-Commerce is
+									reliableaffordable
+								</div>
+								<div class="description">
+									Technology is the use of scientific
+									knowledge for practical purposes or
+									applications, whether in industry or in our
+									everyday lives. So, basically, whenever we
+									use our scientific knowledge to achieve some
+									specific purpose, we're usingtechnology.
+								</div>
+								<div class="hashtag">#e-commerce</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="card" data-index="2">
+						<div class="title" data-index="2">Transportation</div>
+						<img
+							src="./images/bus.jpg"
+							alt="finance"
+							data-index="2"
+						/>
+						<div class="index" data-index="2">#2</div>
+					</div>
+					<div class="card" data-index="3">
+						<div class="title" data-index="3">Finance</div>
+						<img
+							src="./images/bus2.jpg"
+							alt="finance"
+							data-index="3"
+						/>
+						<div class="index" data-index="3">#3</div>
+					</div>
+					<div class="card" data-index="4">
+						<div class="title" data-index="4">ECommerce</div>
+						<img
+							src="./images/bus3.jpg"
+							alt="finance"
+							data-index="4"
+						/>
+						<div class="index" data-index="4">#4</div>
+					</div>
+				</div>
+			</section>
+
+
+		
+			<section class="career" id="career" data-index="3">
+				<div class="overlay">
+					<div class="word">Job</div>
+					<div class="word">Carrer</div>
+				</div>
+				<div>
+					<div class="header">
+						<div class="title highlight">
+							Career
+							<div class="arrow">
+								<span></span>
+								<span></span>
+								<span></span>
+							</div>
+						</div>
+					</div>
+					<div class="content">
+						<div>
+							<div class="hashtag">#careeroptions</div>
+							<div class="title">We Attack On Unemployment</div>
+							<div class="description">
+								RedPhantom is providing 200 job oppurtunities
+								for freshers. Unemployment has an influence on
+								both people and ghe national economy and it may
+								have a cascading effect.
+							</div>
+						</div>
+						<div>
+							<div class="card">
+								<div class="face show triangle">
+									<div class="hashtag">
+										#Beware of Job Scam
+									</div>
+									<div class="info">
+									
+									</div>
+								</div>
+								<div class="face show triangle">
+									<div class="hashtag">#Jobs</div>
+									<div class="info">
+										
+									</div>
+								</div>
+								<div class="face triangle">
+									<div class="hashtag">
+										#Beware of Job Scam
+									</div>
+									<div class="info">
+										
+									</div>
+								</div>
+								<div class="face triangle">
+									<div class="hashtag">#Jobs</div>
+									<div class="info">
+										
+									</div>
+								</div>
+							</div>
+							<div class="card">
+								<div class="face show triangle">
+									<div class="hashtag">#Career</div>
+									<div class="info">
+										
+									</div>
+								</div>
+								<div class="face show triangle">
+									<div class="hashtag">#Jobs</div>
+									<div class="info">
+								
+									</div>
+								</div>
+								<div class="face triangle">
+									<div class="hashtag">#Career</div>
+									<div class="info">
+										For more than 40 years, RP
+										Transportation has provided safe,
+										reliable, affordable transportation
+										services to cities, countries,
+										municipalities, and other jurisdictional
+										entities, as well as private
+										corporations, non-profit agencies, and
+										community organizations.
+									</div>
+								</div>
+								<div class="face triangle">
+									<div class="hashtag">#Jobs</div>
+									<div class="info">
+										Explore a career with the RedPhantom
+										group. Browse and search for jobs with
+										over Four Redphantom companies.
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="arrow">
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+			</section>
+			<section class="news" id="news" data-index="4">
+				<div class="overlay">
+					<div class="word">Updates</div>
+					<div class="word">News</div>
+					<div class="word">Renewal</div>
+				</div>
+				<div class="header">
+					<div class="title highlight">
+						Latest News
+
+						<div class="arrow">
+							<span></span>
+							<span></span>
+							<span></span>
+						</div>
+					</div>
+				</div>
+				<div class="feed">
+					<div class="card">
+						<img
+							
+						/>
+						<div class="content">
+							<div class="title">Facebook</div>
+							<div class="info">
+								Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto voluptatibus iste dolorum facilis reiciendis sed omnis quam quod hic sunt, animi placeat assumenda vel aspernatur deleniti accusamus maiores, in labore.
+							</div>
+						</div>
+					</div>
+					<div class="card">
+						
+						<div class="content">
+							<div class="title">Linkedin</div>
+							<div class="info">
+								Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquam natus explicabo eos recusandae molestiae? Id nulla in iure eum ipsum tenetur est labore rem, esse earum dignissimos natus inventore voluptatem!
+							</div>
+						</div>
+					</div>
+					<div class="card">
+						
+						<div class="content">
+							<div class="title">twitter</div>
+							<div class="info">
+								 Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio excepturi veniam dolorem dolorum tempora reiciendis ullam, dolores sit eum sint minus atque minima eos aspernatur vero quaerat? Perspiciatis, velit qui!
+							</div>
+						</div>
+					</div>
+					<div class="card">
+						
+						<div class="content">
+							<div class="title">instagram</div>
+							<div class="info">
+								Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio repudiandae nostrum culpa, tempora reiciendis quaerat consequuntur consequatur soluta. Modi, quia molestias? Maxime nulla atque beatae id delectus voluptatem accusamus sunt!
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="banner">
+					<div>
+						<img src="./images/4th.jpg" />
+					</div>
+					<div>
+						<div class="title highlight">
+							Nothing is impossible, the word itself says 'I'm
+							possible'!...
+						</div>
+						<div class="sub-title">
+							The Redphantom flag is raised in all fields,
+							including technology and agriculture.
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="brands" id="brands" data-index="5">
+				<div class="slides-container">
+					<div class="slide active"></div>
+					<div class="slide"></div>
+					<div class="slide"></div>
+				</div>
+				<div class="overlay">
+					<div class="word">Projects</div>
+					<div class="word">Renewal</div>
+				</div>
+				<div class="header">
+					<div class="title highlight">
+						Our Brands
+
+						<div class="arrow">
+							<span></span>
+							<span></span>
+							<span></span>
+						</div>
+					</div>
+				</div>
+				<div class="content">
+					<div class="box"> Upcomming Projects...</div>
+					<div class="info">
+						<div class="title">
+							Hello this side Ankit Samrat
+						</div>
+						<div class="description">
+							Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores, facilis!
+						</div>
+					</div>
+					<div class="hashtag highlight">
+						#imaginationtoinnovation
+					</div>
+					<div class="slider" id="two">
+						<button class="action">Prev</button>
+						<div class="display">2</div>
+						<button class="action">Next</button>
+					</div>
+				</div>
+			</section>
+			<footer>
+				<div class="overlay">
+					<div class="word">Redphantom<br />Industries</div>
+				</div>
+				<div class="company-info">
+					<div class="logo-container">
+						<img src="./images/rpnew.png" alt="logo" class="logo" />
+					</div>
+					<div class="links">
+						Follow us on
+						<a href="">
+							<i class="fa-brands fa-instagram iconb m-1"></i>
+						</a>
+						<a href="">
+							<i class="fa-brands fa-twitter iconb m-1"></i>
+						</a>
+						<a href="">
+							<i class="fa-brands fa-youtube iconb m-1"></i>
+						</a>
+						<a href="">
+							<i class="fa-brands fa-facebook iconb m-1"></i>
+						</a>
+						<a href="">
+							<i class="fa-brands fa-whatsapp iconb m-1"></i>
+						</a>
+					</div>
+					<div class="subscribe highlight-border">
+						<div>
+							<input
+								type="email"
+								placeholder="Your Email to Subscribe"
+							/>
+							<button>
+								<i class="fa-solid fa-arrow-right"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="fifthsec container bg-black position-relative">
+					<div class="row container p-4">
+						<div class="col-md-6 col-lg-3">
+							<h6 class="gradient_text">
+								<a href="#home">Business</a>
+							</h6>
+							<ul class="list-unstyled">
+								<li>
+									<a href="./technology.html">Technology</a>
+								</li>
+								<li>
+									<a href="./transport.html">Transport</a>
+								</li>
+								<li><a href="./finance.html">Finance</a></li>
+								<li><a href="#">E-commerce</a></li>
+							</ul>
+						</div>
+						<div class="col-md-6 col-lg-3">
+							<h6 class="gradient_text">Community</h6>
+							<ul class="list-unstyled">
+								<li>Education</li>
+								<li>Empowermant</li>
+								<li>Environment</li>
+								<li>health</li>
+							</ul>
+						</div>
+						<div class="col-md-6 col-lg-3">
+							<h6 class="gradient_text">About</h6>
+							<ul class="list-unstyled">
+								<li>Founder</li>
+								<li>chairman</li>
+								<li>team</li>
+							</ul>
+						</div>
+						<div class="col-md-6 col-lg-3">
+							<h6 class="gradient_text">News</h6>
+							<ul class="list-unstyled">
+								<li>Photos</li>
+								<li>Videos</li>
+								<li>Downloads</li>
+								<li>News</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="copyrights">
+					&#169; 2023-2024 Redphantom. All Rights Reserved.
+				</div>
+			</footer>
+		</main>
+
+	
+	</body>
+</html>
